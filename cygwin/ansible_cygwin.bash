@@ -3,7 +3,7 @@
 DateTimeStamp=$(date '+%m-%d-%y_%H:%M:%S')
 # INSTALL
 install_ansible="pip install ansible"
-install_ansible_play="pip install ansible-toolset ansible-toolkit ansible-lint"
+install_ansible_play="pip install ansible-toolset ansible-toolkit ansible-lint ansible-vault"
 #
 # UPGRADE
 upgrade_ansible_play="pip install --ignore-installed --upgrade ansible"
