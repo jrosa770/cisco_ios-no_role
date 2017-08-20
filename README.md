@@ -57,6 +57,15 @@ For a particular host in this case `ios-swt-1`:
   connection: local
 ```
 
+If SSH Keys are used for authentication you will need to establish where to find the ssh key file under provider
+```yml
+  tasks:
+  - name: define provider
+    set_fact:
+      provider:
+        ssh_keyfile: /path_to_ssh_key_file
+```
+
 > Task Options:
 ```yml
 - name: An IOS Configuration Task
