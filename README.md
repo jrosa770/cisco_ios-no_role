@@ -134,6 +134,7 @@ ansible-playbook cisco-cli-push.yml --ask-vault-pass -i hosts
 No password prompt:
 
 Create a file containing the vault password (vault_pass.py or anything else) and lock down permissions
+
 `chmod 600 vault_pass.py`
 
 ```sh
