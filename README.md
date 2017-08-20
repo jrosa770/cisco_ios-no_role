@@ -126,11 +126,13 @@ Confirm New Vault password: your_secret_password
 > Running the Playbook with encrypted `secrets.yml`
 
 Password Prompted:
+
 ```sh
 ansible-playbook cisco-cli-push.yml --ask-vault-pass -i hosts
 ```
 
 No password prompt:
+
 Create a file containing the vault password (vault_pass.py or anything else) and lock down permissions
 `chmod 600 vault_pass.py`
 
