@@ -116,6 +116,7 @@ If SSH Keys are used for authentication you will need to establish where to find
 ```
 
 #### Ecrypting the `secrets.yml` file
+
 ```yml
 $ansible-vault encrypt secrets.yml
 New Vault password: your_secret_password
@@ -133,7 +134,6 @@ No password prompt:
 Create a file containing the vault password (vault_pass.py or anything else) and lock down permissions
 `chmod 600 vault_pass.py`
 
-Running Playbook:
 ```sh
 ansible-playbook cisco-cli-push.yml --vault-password-file vault_pass.py - i hosts
 ```
