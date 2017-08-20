@@ -34,9 +34,10 @@ ansible-playbook -vvv cisco-cli-push.yml -i hosts
 
 ## Options in Playbook and Tasks
 > Playbook
-The playbook can be used to affect a group in the hosts file or a particular host within a group
-Group = ios
+The playbook can be used to affect a group in the hosts inventory file or a particular host within a group
+Group = ios 
 ```
+# File: hosts
 [ios]
 ios-swt-1
 ios-rtr-1
@@ -50,7 +51,7 @@ ios-rtr-1
 
 The playbook will run the task on `ios-swt-1` and `ios-rtr-1`
 
-For a particular host in this case `ios-swt-1`:
+For a particular host within the inventory file, in this case `ios-swt-1`:
 ```yml
 ---
 - hosts: ios-swt-1
