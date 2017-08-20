@@ -1,6 +1,6 @@
 # Non Role Based Playbook
 Template for non role based ios, on demmand configuration. Uses Ansible modules.
-> Folder Structure:
+#### Folder Structure:
 ```
 cisco_ios-no_role/
 ├── backup
@@ -37,7 +37,8 @@ ansible-playbook -vvv cisco-cli-push.yml -i hosts
 
 ## Options in Playbook and Tasks
 > Playbook
-The playbook can be used to affect a group in the hosts inventory file or a particular host within a group
+
+The playbook can be directed to affect a group in the hosts inventory file or a particular host within a group
 Group = ios 
 ```
 # File: hosts
@@ -71,7 +72,7 @@ If SSH Keys are used for authentication you will need to establish where to find
         ssh_keyfile: /path_to_ssh_key_file
 ```
 
-> Task Options:
+##### Task Options:
 ```yml
 - name: An IOS Configuration Task
   ios_config:
@@ -87,7 +88,8 @@ If SSH Keys are used for authentication you will need to establish where to find
     save: yes 
 ```
 
-Writing a very generic task for `ios_command:`
+> Writing a very generic task for `ios_command:`
+
 ```yml
 ---
 - name: Freeform Task
@@ -102,7 +104,8 @@ Writing a very generic task for `ios_command:`
 - debug: var=freeform.stdout_lines
 ```
 
-Saving the output to a file
+> Saving the output to a file
+
 ```yml
 - name: append to output
 # append the command output to a local file
@@ -134,7 +137,8 @@ Running Playbook:
 ansible-playbook cisco-cli-push.yml --vault-password-file vault_pass.py - i hosts
 ```
 
-Editing Encrypted files in vault
+> Editing Encrypted files in vault
+
 ```sh
 $ansible-vault edit secrets.yml
 Vault password: your_secret_password
