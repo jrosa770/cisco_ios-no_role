@@ -62,6 +62,9 @@ For a particular host in this case `ios-swt-1`:
 - name: An IOS Configuration Task
   ios_config:
     provider: "{{ provider }}"
+    # "authorize: [yes | no ]" Instructs the module to enter privileged mode on the remote device before sending any commands. 
+    # Mainly If enable password (auth_pass:) is used in secret.yml
+    authorize: yes
     lines:
       - [configuration line]
     # "backup: [yes | no] " Makes a backup of the running configuration to the playbook's folder (backup/)
