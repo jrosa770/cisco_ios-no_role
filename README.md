@@ -2,21 +2,23 @@
 Template for non role based ios, on demmand configuration. Uses Ansible modules.
 > Folder Structure:
 ```
-cli_based-no_role-template/
-└── cisco_ios
-    ├── backup
-    │   └── README.md
-    ├── cisco-cli-push.yml
-    ├── config_partial
-    │   └── raw_banner.cfg
-    ├── hosts
-    ├── README.md
-    ├── secrets.yml
-    └── tasks
-        ├── banner_motd.yml
-        ├── configure-interface.yml
-        ├── runn-backup-save-to-start.yml
-        └── set-dns.yml
+cisco_ios-no_role/
+├── backup
+│   └── README.md
+├── cisco-cli-push.yml
+├── config_partial
+│   └── raw_banner.cfg
+├── cygwin
+│   ├── ansible_cygwin.bash
+│   └── README.md
+├── hosts
+├── README.md
+├── secrets.yml
+└── tasks
+    ├── banner_motd.yml
+    ├── configure-interface.yml
+    ├── runn-backup-save-to-start.yml
+    └── set-dns.yml
 ```
 
 > Usage:
@@ -98,5 +100,5 @@ Vault password: your_secret_password
 ```
 Or
 ```sh
-$ansible-vault edit secrets.yml --vault-password-file vault_pass.py
+$ansible-vault edit secrets.yml --vault-password-file vault_pass.py - i hosts
 ```
