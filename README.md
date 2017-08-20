@@ -36,7 +36,8 @@ ansible-playbook -vvv cisco-cli-push.yml -i hosts
 ```
 
 ## Options in Playbook and Tasks
-> Playbook
+
+###### Playbook Options
 
 The playbook can be directed to affect a group in the hosts inventory file or a particular host within a group
 Group = ios 
