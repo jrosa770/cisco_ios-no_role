@@ -1,0 +1,28 @@
+---
+- name: IOS Interface Configuration #1
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - description EMPTY
+    parents: interface range GigabitEthernet1/1/1  - 4
+    backup: yes # Makes a backup of the running configuration to the playbook's folder (backup/)
+    save: yes # Saves running Configuration
+
+- name: IOS Interface Configuration #2
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - description WAN
+      - ip address 192.168.0.1 255.255.255.252
+    parents: interface range GigabitEthernet1/0/48
+    save: yes
+
+- name: Show Run of Changed Interface
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+     - show run interface GigabitEthernet1/1/1
+     - show run interface GigabitEthernet1/1/2
+     - show run interface GigabitEthernet1/1/3
+     - show run interface GigabitEthernet1/1/4
+     - show run interface GigabitEthernet1/0/48

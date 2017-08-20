@@ -1,0 +1,9 @@
+[ios:vars]
+ansible_python_interpreter=/usr/local/bin/python2.7
+ansible_ssh_pass=su_passwd
+ansible_connection = local
+# If SSH/ For Telnet - Port=23
+port=22
+[ios]
+ios-swt-1
+ios-rtr-1

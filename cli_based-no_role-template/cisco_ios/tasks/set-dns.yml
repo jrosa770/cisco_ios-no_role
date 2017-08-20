@@ -1,0 +1,15 @@
+---
+- name: DNS Configuration
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - ip domain-name example.com
+      - ip name-server 10.1.1.1
+      - no ip name-server 10.2.2.2
+      - ip name-server 10.3.3.3
+    backup: yes
+
+- name: save running to startup when modified
+  ios_config:
+    save: yes
+    provider: "{{ provider }}"

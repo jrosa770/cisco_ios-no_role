@@ -1,0 +1,18 @@
+- name: Removes the motd banner
+  ios_banner:
+    banner: motd
+    state: absent
+    provider: "{{ provider }}"
+    backup: yes
+
+- name: Configure banner from file
+  ios_banner:
+    banner:  motd
+    text: "{{ lookup('file', './config_partial/raw_banner.cfg') }}"
+    state: present
+    provider: "{{ provider }}"
+
+- name: save running to startup when modified
+  ios_config:
+    save: yes
+    provider: "{{ provider }}"
