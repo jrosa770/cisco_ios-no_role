@@ -1,0 +1,17 @@
+---
+- name: Freeform Task
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+# Change the command after "-" to any IOS command you would like to run.
+      - show version
+  register: freeform
+
+# Provides an output if -vvv is not used when running ansible-playbook
+- debug: var=freeform.stdout_lines
+
+- name: append to output
+# append the command output to a local file
+  copy:
+    content: "{{ freeform.stdout[0] }}"
+    dest: "play_results/{{ inventory_hostname }}.txt"

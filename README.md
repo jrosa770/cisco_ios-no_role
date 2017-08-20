@@ -12,11 +12,14 @@ cisco_ios-no_role/
 │   ├── ansible_cygwin.bash
 │   └── README.md
 ├── hosts
+├── play_results
+│   └── README.md
 ├── README.md
 ├── secrets.yml
 └── tasks
     ├── banner_motd.yml
     ├── configure-interface.yml
+    ├── ios_command-freeform.yml
     ├── reload_ios.yml
     ├── runn-backup-save-to-start.yml
     └── set-dns.yml
@@ -97,6 +100,15 @@ Writing a very generic task for `ios_command:`
 
 # Provides an output if -vvv is not used when running ansible-playbook
 - debug: var=freeform.stdout_lines
+```
+
+Saving the output to a file
+```yml
+- name: append to output
+# append the command output to a local file
+  copy:
+    content: "{{ freeform.stdout[0] }}"
+    dest: "./{{ inventory_hostname }}.txt"
 ```
 
 > Ecrypting the `secrets.yml` file
