@@ -7,6 +7,8 @@ The bash file ansible_cygwin will install Ansible in Cygwin64 and the components
 
 It will also a basic `ansible.cfg`. 
 
-Requires Python 2.7 and PIP
+Requires Python 2.7+ and PIP
+
+For PIP: `easy_install-2.7 pip`
 
 You can install Python and pip, when setting up Cygwin for the first time, after install using the setup.exe or via apt-cyg (https://github.com/transcode-open/apt-cyg).
