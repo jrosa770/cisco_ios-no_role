@@ -115,7 +115,7 @@ If SSH Keys are used for authentication you will need to establish where to find
     dest: "play_results/{{ inventory_hostname }}.txt"
 ```
 
-> Ecrypting the `secrets.yml` file
+#### Ecrypting the `secrets.yml` file
 ```yml
 $ansible-vault encrypt secrets.yml
 New Vault password: your_secret_password
