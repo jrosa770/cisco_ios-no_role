@@ -1,0 +1,5 @@
+- name: Reload device in 1 minute. Overcomes reload prompt
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+      - "reload in 1\ny"
