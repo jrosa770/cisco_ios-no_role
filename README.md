@@ -84,6 +84,21 @@ If SSH Keys are used for authentication you will need to establish where to find
     save: yes 
 ```
 
+Writing a very generic task for `ios_command:`
+```yml
+---
+- name: Freeform Task
+  ios_command:
+    provider: "{{ provider }}"
+    commands:
+# Change the command after "-" to any IOS command you would like to run.
+      - show version
+  register: freeform
+
+# Provides an output if -vvv is not used when running ansible-playbook
+- debug: var=freeform.stdout_lines
+```
+
 > Ecrypting the `secrets.yml` file
 ```yml
 $ansible-vault encrypt secrets.yml
