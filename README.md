@@ -108,7 +108,7 @@ Saving the output to a file
 # append the command output to a local file
   copy:
     content: "{{ freeform.stdout[0] }}"
-    dest: "./{{ inventory_hostname }}.txt"
+    dest: "play_results/{{ inventory_hostname }}.txt"
 ```
 
 > Ecrypting the `secrets.yml` file
