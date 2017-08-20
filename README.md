@@ -17,6 +17,7 @@ cisco_ios-no_role/
 └── tasks
     ├── banner_motd.yml
     ├── configure-interface.yml
+    ├── reload_ios.yml
     ├── runn-backup-save-to-start.yml
     └── set-dns.yml
 ```
