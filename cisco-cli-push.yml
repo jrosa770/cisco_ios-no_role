@@ -13,7 +13,7 @@
       provider:
         host: "{{ inventory_hostname }}"
         username: "{{ creds['username'] }}"
-        #Uncomment if enable is needed
+        #Uncomment next line if enable password is needed
         #auth_pass: "{{ creds['auth_pass'] }}"
         password: "{{ creds['password'] }}"
         transport: cli
