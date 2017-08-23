@@ -1,0 +1,8 @@
+{% if 'ios' in group_names %}
+
+{% for key,value in vlans|dictsort %} 
+vlan {{ value.id }} 
+  name {{ key }} 
+{% endfor %}
+
+{% endif %}

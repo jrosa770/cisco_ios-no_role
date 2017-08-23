@@ -1,0 +1,11 @@
+---
+- name: deploy vlan
+  ios_config:
+    src: templates/vlan.j2
+    provider: "{{ provider }}"
+    backup: yes
+    save: yes
+  register: vlan_deploy
+
+- debug: 
+    var: vlan_deploy

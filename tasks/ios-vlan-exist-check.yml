@@ -1,0 +1,17 @@
+---
+- name: check for vlan "{{ vlan_id }}"
+  ios_command:
+    commands: "show vlan id {{ vlan_id }}"
+    provider: "{{ provider }}"
+  ignore_errors: yes
+  register: sh_vlan_output
+
+- set_fact:
+    vlan_exists: false
+  when: sh_vlan_output.failed is defined
+
+- set_fact:
+    vlan_exists: true
+  when: sh_vlan_output.failed is undefined
+
+- debug:  var=sh_vlan_output.stdout_lines

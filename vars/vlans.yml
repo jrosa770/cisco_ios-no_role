@@ -1,0 +1,6 @@
+---
+# Multi VLAN Add
+vlans_add:
+ ANSIBLE_TEST_VLAN10: { id: 10, }
+ ANSIBLE_TEST_VLAN11: { id: 11, }
+vlans: "{{ vlans_add }}"

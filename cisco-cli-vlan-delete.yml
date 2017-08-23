@@ -1,0 +1,27 @@
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+
+  tasks:
+ 
+  - name: obtain login credentials
+    include_vars: vault/secrets.yml
+
+  - name: obtain vars
+    include_vars: vars/vlan.yml
+
+  - name: define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        transport: cli
+
+# Check if VLAN listed in vars/vlan.yml exists
+  - include: tasks/ios-vlan-exist-check.yml
+
+# If VLAN Exist:
+  - include: tasks/ios-vlan-delete.yml
+    when: "{{ vlan_exists }}"

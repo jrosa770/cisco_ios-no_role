@@ -1,0 +1,4 @@
+---
+# Single VLAN Add
+ vlan_id: 12
+ vlan_name: ANSIBLE_TEST_VLAN12

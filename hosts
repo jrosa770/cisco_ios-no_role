@@ -1,8 +1,16 @@
+# hosts - Ansible Inventory
+[ios-rtr]
+ios-rtr-1
+
+[ios-swt]
+ios-swt-1
+
+[ios:children]
+ios-rtr
+ios-swt
+
 [ios:vars]
 ansible_python_interpreter=/usr/bin/python
 ansible_connection = local
 # If SSH/ For Telnet - Port=23
 port=22
-[ios]
-ios-swt-1
-ios-rtr-1

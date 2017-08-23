@@ -1,0 +1,9 @@
+---
+- name: delete vlan
+  ios_config:
+    lines:
+      - no vlan "{{ vlan_id }}"
+    provider: "{{ provider }}"
+    backup: yes
+    save: yes
+  register: vlan_delete

@@ -1,0 +1,10 @@
+---
+- name: deploy vlan
+  ios_config:
+    lines:
+      - name "{{ vlan_name }}"
+    parents: vlan "{{ vlan_id }}"
+    provider: "{{ provider }}"
+    backup: yes
+    save: yes
+  register: vlan_deploy

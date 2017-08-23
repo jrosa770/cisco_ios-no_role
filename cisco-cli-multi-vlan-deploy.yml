@@ -1,0 +1,23 @@
+---
+- hosts: ios-swt
+  gather_facts: no
+  connection: local
+
+  tasks:
+ 
+  - name: obtain login credentials
+    include_vars: vault/secrets.yml
+
+  - name: obtain vars
+    include_vars: vars/vlans.yml
+
+  - name: define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        transport: cli
+        
+# Deploy VLANs listed in vars/vlans.yml
+  - include: tasks/ios-multi-vlan-deploy.yml
