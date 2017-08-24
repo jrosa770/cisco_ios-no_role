@@ -19,4 +19,4 @@
         password: "{{ creds['password'] }}"
         transport: cli
 
-  - include: tasks/ios-multi-vlan-delete.yml
+  - include: tasks/ios_config-multi-vlan-delete.yml
