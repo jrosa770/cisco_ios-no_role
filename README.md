@@ -3,9 +3,9 @@ Template for non role based ios, on demmand configuration. Uses Ansible modules.
 #### Folder Structure:
 ```
 cisco_ios-no_role/
-├── _config.yml
 ├── backup
 │   └── README.md
+├── cisco-cli-l2-multi-vlan.yml
 ├── cisco-cli-multi-vlan-delete.yml
 ├── cisco-cli-multi-vlan-deploy.yml
 ├── cisco-cli-push.yml
@@ -27,6 +27,7 @@ cisco_ios-no_role/
 │   ├── ios_command-runn-backup-save-to-start.yml
 │   ├── ios_command-vlan-exist-check.yml
 │   ├── ios_config-interface.yml
+│   ├── ios_config-l2-multi-vlan.yml
 │   ├── ios_config-multi-vlan-delete.yml
 │   ├── ios_config-multi-vlan-deploy.yml
 │   ├── ios_config-set-dns.yml
@@ -37,11 +38,13 @@ cisco_ios-no_role/
 ├── templates
 │   ├── README.md
 │   ├── vlan-delete.j2
-│   └── vlan-deploy.j2
+│   ├── vlan-deploy.j2
+│   └── vlan-multi.j2
 └── vars
     ├── README.md
     ├── vlan.yml
-    └── vlans.yml
+    ├── vlans.yml
+    └── vlans-multi.yml
 ```
 
 > Usage:
