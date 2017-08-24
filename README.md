@@ -3,8 +3,10 @@ Template for non role based ios, on demmand configuration. Uses Ansible modules.
 #### Folder Structure:
 ```
 cisco_ios-no_role/
+├── _config.yml
 ├── backup
 │   └── README.md
+├── cisco-cli-multi-vlan-delete.yml
 ├── cisco-cli-multi-vlan-deploy.yml
 ├── cisco-cli-push.yml
 ├── cisco-cli-vlan-delete.yml
@@ -20,19 +22,24 @@ cisco_ios-no_role/
 ├── README.md
 ├── secrets.yml
 ├── tasks
-│   ├── banner_motd.yml
-│   ├── configure-interface.yml
-│   ├── ios_command-freeform.yml
-│   ├── ios-multi-vlan-deploy.yml
-│   ├── ios-vlan-delete.yml
-│   ├── ios-vlan-deploy.yml
-│   ├── ios-vlan-exist-check.yml
-│   ├── reload_ios.yml
-│   ├── runn-backup-save-to-start.yml
-│   └── set-dns.yml
+│   ├── ios_banner-motd.yml
+│   ├── ios_command-reload_ios.yml
+│   ├── ios_command-runn-backup-save-to-start.yml
+│   ├── ios_command-vlan-exist-check.yml
+│   ├── ios_config-interface.yml
+│   ├── ios_config-multi-vlan-delete.yml
+│   ├── ios_config-multi-vlan-deploy.yml
+│   ├── ios_config-set-dns.yml
+│   ├── ios_config-vlan-delete.yml
+│   ├── ios_config-vlan-deploy.yml
+│   ├── ios_config-vlan-exist-check.yml
+│   └── ios_freeform.yml
 ├── templates
-│   └── vlan.j2
+│   ├── README.md
+│   ├── vlan-delete.j2
+│   └── vlan-deploy.j2
 └── vars
+    ├── README.md
     ├── vlan.yml
     └── vlans.yml
 ```

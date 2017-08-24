@@ -20,11 +20,11 @@
         transport: cli
 
 # Check if VLAN Exists
-  - include: tasks/ios-vlan-exist-check.yml
+  - include: tasks/ios_command-vlan-exist-check.yml
 
 # If VLAN listed in vars/vlan.yml doesn't exist:
-  - include: tasks/ios-vlan-deploy.yml
+  - include: tasks/ios_config-vlan-deploy.yml
     when: "not {{ vlan_exists }}"
 
 # Check for VLAN Addition:
-  - include: tasks/ios-vlan-exist-check.yml
+  - include: tasks/ios_command-vlan-exist-check.yml

@@ -20,8 +20,8 @@
         transport: cli
 
 # Check if VLAN listed in vars/vlan.yml exists
-  - include: tasks/ios-vlan-exist-check.yml
+  - include: tasks/ios_command-vlan-exist-check.yml
 
 # If VLAN Exist:
-  - include: tasks/ios-vlan-delete.yml
+  - include: tasks/ios_config-vlan-delete.yml
     when: "{{ vlan_exists }}"

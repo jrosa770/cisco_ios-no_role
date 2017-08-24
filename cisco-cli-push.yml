@@ -18,4 +18,4 @@
         #auth_pass: "{{ creds['auth_pass'] }}"
         transport: cli
 
-  - include: tasks/configure-interface.yml
+  - include: tasks/ios_config-interface.yml

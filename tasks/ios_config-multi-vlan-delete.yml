@@ -1,0 +1,11 @@
+---
+- name: multi vlan delte
+  ios_config:
+    src: templates/vlan-delete.j2
+    provider: "{{ provider }}"
+    backup: yes
+    save: yes
+  register: vlan_delete
+
+- debug: 
+    var: vlan_delete

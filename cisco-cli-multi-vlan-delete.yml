@@ -18,6 +18,5 @@
         username: "{{ creds['username'] }}"
         password: "{{ creds['password'] }}"
         transport: cli
-        
-# Deploy VLANs listed in vars/vlans.yml
-  - include: tasks/ios_config-multi-vlan-deploy.yml
+
+  - include: tasks/ios-multi-vlan-delete.yml
