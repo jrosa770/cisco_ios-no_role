@@ -5,7 +5,10 @@ Template for non role based ios, on demmand configuration. Uses Ansible modules.
 cisco_ios-no_role/
 ├── backup
 │   └── README.md
+├── cisco-cli-multi-vlan-deploy.yml
 ├── cisco-cli-push.yml
+├── cisco-cli-vlan-delete.yml
+├── cisco-cli-vlan-deploy.yml
 ├── config_partial
 │   └── raw_banner.cfg
 ├── cygwin
@@ -16,13 +19,22 @@ cisco_ios-no_role/
 │   └── README.md
 ├── README.md
 ├── secrets.yml
-└── tasks
-    ├── banner_motd.yml
-    ├── configure-interface.yml
-    ├── ios_command-freeform.yml
-    ├── reload_ios.yml
-    ├── runn-backup-save-to-start.yml
-    └── set-dns.yml
+├── tasks
+│   ├── banner_motd.yml
+│   ├── configure-interface.yml
+│   ├── ios_command-freeform.yml
+│   ├── ios-multi-vlan-deploy.yml
+│   ├── ios-vlan-delete.yml
+│   ├── ios-vlan-deploy.yml
+│   ├── ios-vlan-exist-check.yml
+│   ├── reload_ios.yml
+│   ├── runn-backup-save-to-start.yml
+│   └── set-dns.yml
+├── templates
+│   └── vlan.j2
+└── vars
+    ├── vlan.yml
+    └── vlans.yml
 ```
 
 > Usage:
@@ -63,6 +75,36 @@ For a particular host within the inventory file, in this case `ios-swt-1`:
   gather_facts: no
   connection: local
 ```
+
+> More on hosts inventory file structure
+
+```
+[ios-rtr]
+ios-rtr-1
+
+[ios-swt]
+ios-swt-1
+
+[ios:children]
+ios-rtr
+ios-swt
+
+[ios:vars]
+ansible_python_interpreter=/usr/bin/python
+ansible_connection = local
+# If SSH/ For Telnet - Port=23
+port=22
+```
+
+```yml
+---
+- hosts: ios
+  gather_facts: no
+  connection: local
+```
+
+The playbook will run the task on groups `[ios-swt]` and `[ios-rtr]`
+
 
 If SSH Keys are used for authentication you will need to establish where to find the ssh key file under provider
 ```yml
