@@ -1,5 +1,5 @@
 ---
-- name: multi vlan delte
+- name: multi vlan delete
   ios_config:
     src: templates/vlan-delete.j2
     provider: "{{ provider }}"
