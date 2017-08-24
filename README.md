@@ -116,7 +116,8 @@ port=22
 The playbook will run the task on groups `[ios-swt]` and `[ios-rtr]`
 
 
-If SSH Keys are used for authentication you will need to establish where to find the ssh key file under provider
+> If SSH Keys are used for authentication you will need to establish where to find the ssh key file under provider
+
 ```yml
   tasks:
   - name: define provider
