@@ -1,5 +1,5 @@
 ---
-- hosts: ios
+- hosts: ios-swt
   gather_facts: no
   connection: local
 
@@ -9,7 +9,7 @@
     include_vars: secrets.yml
 
   - name: obtain vars
-    include_vars: vars/vlan.yml
+    include_vars: vars/vlans-multi.yml
 
   - name: define provider
     set_fact:
@@ -18,10 +18,6 @@
         username: "{{ creds['username'] }}"
         password: "{{ creds['password'] }}"
         transport: cli
-
-# Check if VLAN listed in vars/vlan.yml exists
-  - include: tasks/ios_command-vlan-exist-check.yml
-
-# If VLAN Exist:
-  - include: tasks/ios_config-vlan-delete.yml
-    when: "{{ vlan_exists }}"
+        
+# Deploy VLANs listed in vars/vlans.yml
+  - include: tasks/ios_config-l2-multi-vlan.yml

@@ -6,7 +6,7 @@
   tasks:
  
   - name: obtain login credentials
-    include_vars: vault/secrets.yml
+    include_vars: secrets.yml
 
   - name: obtain vars
     include_vars: vars/vlans.yml

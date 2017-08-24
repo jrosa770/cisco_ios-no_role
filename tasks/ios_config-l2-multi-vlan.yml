@@ -1,0 +1,11 @@
+---
+- name: Process "{{ proc }}" vlan(s)
+  ios_config:
+    provider: "{{ provider }}"
+    src: templates/vlan-multi.j2
+    backup: yes
+    save: yes
+  register: vlan_L2
+
+- debug: 
+    var: vlan_L2

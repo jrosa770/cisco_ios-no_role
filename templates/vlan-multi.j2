@@ -1,0 +1,14 @@
+{% if proc == 'deploy' %}
+
+{% for key,value in vlans|dictsort %}
+vlan {{ value.id }} 
+  name {{ key }} 
+{% endfor %}
+
+{% elif proc == 'delete' %}
+
+{% for key,value in vlans|dictsort %} 
+no vlan {{ value.id }} 
+{% endfor %}
+
+{% endif %}
