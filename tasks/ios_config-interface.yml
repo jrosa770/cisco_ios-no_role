@@ -1,4 +1,6 @@
 ---
+# This task can be used with the cisco-cli-push.yml playbook
+# You can edit and run the task as a chain or pick and choose the options for a separate or particular task
 - name: IOS Interface Configuration #1
   ios_config:
     provider: "{{ provider }}"
@@ -24,12 +26,46 @@
   ios_config:
     provider: "{{ provider }}"
     lines:
+      - description TRUNK_PORT
+      - switchport
+      - switchport trunk encapsulation dot1q
+      - switchport trunk native vlan 2
+      - switchport trunk allowed vlan 1,2,22,200
+      - switchport mode trunk
+    parents: interface GigabitEthernet1/0/50
+
+- name: IOS Interface Configuration #4
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - description TRUNK_PORT_PCh1_MEMBER
+      - channel-group 1 mode active
+    parents: interface range GigabitEthernet1/0/49 - 50
+    backup: yes
+
+- name: IOS Interface Configuration #5
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - description 2GB PORT CHANNEL
+      - switchport
+      - switchport trunk encapsulation dot1q
+      - switchport trunk native vlan 2
+      - switchport trunk allowed vlan 1,2,22,200
+      - switchport mode trunk
+    parents: interface Port-channel1
+    backup: yes
+
+- name: IOS Interface Configuration #6
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
       - description VLAN200_ACCESS
       - switchport access vlan 200
       - switchport mode access
     parents: interface GigabitEthernet1/0/5
 
-- name: IOS Interface Configuration #4
+- name: IOS Interface Configuration #7
   ios_config:
     provider: "{{ provider }}"
     lines:
@@ -37,7 +73,7 @@
       - ip address 10.1.1.251 255.255.255.0
     parents: interface Vlan2
 
-- name: IOS Interface Configuration #5
+- name: IOS Interface Configuration #8
   ios_config:
     provider: "{{ provider }}"
     lines:
