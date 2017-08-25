@@ -17,7 +17,7 @@
     parents: interface GigabitEthernet1/0/48
     save: yes
 
-- name: Show Run of Changed Interface
+- name: Show Run of Changed Interface(s)
   ios_command:
     provider: "{{ provider }}"
     commands:
@@ -26,3 +26,7 @@
      - show run interface GigabitEthernet1/1/3
      - show run interface GigabitEthernet1/1/4
      - show run interface GigabitEthernet1/0/48
+  ignore_errors: yes
+  register: show_run_interfaces
+
+- debug:  var=show_run_interfaces.stdout_lines
