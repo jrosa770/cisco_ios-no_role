@@ -14,7 +14,7 @@
     lines:
       - description WAN
       - ip address 192.168.0.1 255.255.255.252
-    parents: interface range GigabitEthernet1/0/48
+    parents: interface GigabitEthernet1/0/48
     save: yes
 
 - name: Show Run of Changed Interface
