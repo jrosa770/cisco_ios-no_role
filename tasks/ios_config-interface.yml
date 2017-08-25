@@ -12,6 +12,35 @@
   ios_config:
     provider: "{{ provider }}"
     lines:
+      - description TRUNK_PORT
+      - switchport
+      - switchport trunk encapsulation dot1q
+      - switchport trunk native vlan 2
+      - switchport trunk allowed vlan 1,2,22,200
+      - switchport mode trunk
+    parents: interface GigabitEthernet1/0/49
+
+- name: IOS Interface Configuration #3
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - description VLAN200_ACCESS
+      - switchport access vlan 200
+      - switchport mode access
+    parents: interface GigabitEthernet1/0/5
+
+- name: IOS Interface Configuration #4
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
+      - description Management
+      - ip address 10.1.1.251 255.255.255.0
+    parents: interface Vlan2
+
+- name: IOS Interface Configuration #5
+  ios_config:
+    provider: "{{ provider }}"
+    lines:
       - description WAN
       - ip address 192.168.0.1 255.255.255.252
     parents: interface GigabitEthernet1/0/48
@@ -25,7 +54,9 @@
      - show run interface GigabitEthernet1/1/2
      - show run interface GigabitEthernet1/1/3
      - show run interface GigabitEthernet1/1/4
+     - show run interface GigabitEthernet1/1/5
      - show run interface GigabitEthernet1/0/48
+     - show run interface GigabitEthernet1/1/49
   ignore_errors: yes
   register: show_run_interfaces
 
