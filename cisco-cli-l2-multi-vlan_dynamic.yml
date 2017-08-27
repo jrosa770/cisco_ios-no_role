@@ -5,7 +5,7 @@
 
   
   tasks:
-
+# Check for VLANs and if not present will add to device
   - name: obtain login credentials
     include_vars: secrets.yml
 
