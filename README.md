@@ -6,6 +6,7 @@ cisco_ios-no_role/
 ├── backup
 │   └── README.md
 ├── cisco-cli-l2-multi-vlan.yml
+├── cisco-cli-l2-multi-vlan_dynamic.yml
 ├── cisco-cli-multi-vlan-delete.yml
 ├── cisco-cli-multi-vlan-deploy.yml
 ├── cisco-cli-push.yml
@@ -23,6 +24,7 @@ cisco_ios-no_role/
 ├── secrets.yml
 ├── tasks
 │   ├── ios_banner-motd.yml
+│   ├── ios_command-multi-vlan-exist-check.yml
 │   ├── ios_command-reload_ios.yml
 │   ├── ios_command-runn-backup-save-to-start.yml
 │   ├── ios_command-vlan-exist-check.yml
@@ -37,14 +39,17 @@ cisco_ios-no_role/
 │   └── ios_freeform.yml
 ├── templates
 │   ├── README.md
+│   ├── vlan_id.j2
 │   ├── vlan-delete.j2
 │   ├── vlan-deploy.j2
 │   └── vlan-multi.j2
 └── vars
     ├── README.md
     ├── vlan.yml
+    ├── vlan_id.yml
     ├── vlans.yml
     └── vlans-multi.yml
+
 ```
 
 > Usage:
