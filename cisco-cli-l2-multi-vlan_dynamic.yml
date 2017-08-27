@@ -1,0 +1,37 @@
+---
+- hosts: ios-swt
+  gather_facts: no
+  connection: local
+
+  
+  tasks:
+
+  - name: obtain login credentials
+    include_vars: secrets.yml
+
+  - name: obtain vars for vlans
+    include_vars: vars/vlans-multi.yml
+
+  - name: create vlan_id.yml file for show vlan id task
+    template: 
+       src=templates/vlan_id.j2 
+       dest=vars/vlan_id.yml
+    with_items: "{{ vlans }}"
+
+  - name: define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        transport: cli
+
+# Check if VLAN Exists
+  - include: tasks/ios_command-multi-vlan-exist-check.yml
+
+# If VLAN(s) listed in vars/vlans-multi.yml doesn't exist:
+  - include: tasks/ios_config-l2-multi-vlan.yml
+    when: "not {{ vlan_exists }}"
+
+# Check if VLAN Exists
+  - include: tasks/ios_command-multi-vlan-exist-check.yml

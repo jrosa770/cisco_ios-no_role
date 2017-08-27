@@ -1,0 +1,3 @@
+show:
+{% for key,value in vlans|dictsort %} - sh vlan id {{ value.id }} 
+{% endfor %}

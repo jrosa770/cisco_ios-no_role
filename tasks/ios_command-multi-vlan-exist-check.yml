@@ -1,0 +1,20 @@
+---
+- name: obtain vars
+  include_vars: vars/vlan_id.yml
+
+- name: check for vlan "{{ vlans }}"
+  ios_command:
+    commands: "{{ show }}"
+    provider: "{{ provider }}"
+  ignore_errors: yes
+  register: sh_vlan_output
+
+- set_fact:
+    vlan_exists: false
+  when: sh_vlan_output.failed is defined
+
+- set_fact:
+    vlan_exists: true
+  when: sh_vlan_output.failed is undefined
+
+- debug:  var=sh_vlan_output.stdout_lines
