@@ -212,3 +212,188 @@ Or
 ```sh
 $ansible-vault edit secrets.yml --vault-password-file vault_pass.py - i hosts
 ```
+
+> Workaround for the `ios_command` no template limitation
+
+The IOS module for `ios_config` and `ios_template` have built in provisions for IOS configurations produced via templates. On the other hand `ios_command` does not contain any provisions for templates only single or multiple commands under the `command:` instruction.
+
+Example:
+```yml
+- name: An ios_command routine
+  ios_command:
+    commands: show vlan
+```
+
+Or:
+```yml
+- name: An ios_command routine
+  ios_command:
+    commands:
+      - show vlan id 11
+      - show vlan id 12
+      - show vlan
+```
+
+The workaround is a separate task using the `template:` module in Ansible.
+Example from: `cisco-cli-l2-multi-vlan_dynamic.yml`
+```yml
+  - name: create vlan_id.yml file for show vlan id task
+    template: 
+       src=templates/vlan_id.j2 
+       dest=vars/vlan_id.yml
+    with_items: "{{ vlans }}"
+```
+Template `templates/vlan_id.j2`
+```j2
+show:
+{% for key,value in vlans|dictsort %} - sh vlan id {{ value.id }} 
+{% endfor %}
+```
+* Notice that the template includes the space needed for proper syntax *
+
+Vars file (`vars\vlans-multi.yml`:
+```yml
+---
+proc: deploy
+vlans_add:
+ ANSIBLE_TEST_VLAN10: { id: 10, }
+ ANSIBLE_TEST_VLAN11: { id: 11, }
+vlans: "{{ vlans_add }}"
+```
+
+Task (From: `tasks/ios_command-multi-vlan-exist-check.yml`):
+```yml
+---
+- name: obtain vars
+  include_vars: vars/vlan_id.yml
+
+- name: check for vlan "{{ vlans }}"
+  ios_command:
+    commands: "{{ show }}"
+    provider: "{{ provider }}"
+  ignore_errors: yes
+  register: sh_vlan_output
+```
+
+Created file:
+```yml
+show:
+ - sh vlan id 10
+ - sh vlan id 11 
+```
+
+Playbook Debug:
+```json
+TASK [create vlan_id.yml file for show vlan id task] ******************************************************************************************************************************************
+ok: [ios-swt-1] => (item= ANSIBLE_TEST_VLAN10) => {
+    "changed": false,
+    "diff": {
+        "after": {
+            "path": "vars/vlan_id.yml"
+        },
+        "before": {
+            "path": "vars/vlan_id.yml"
+        }
+    },
+    "gid": 197121,
+    "group": "None",
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": null,
+            "content": null,
+            "delimiter": null,
+            "dest": "vars/vlan_id.yml",
+            "diff_peek": null,
+            "directory_mode": null,
+            "follow": true,
+            "force": false,
+            "group": null,
+            "mode": null,
+            "original_basename": "vlan_id.j2",
+            "owner": null,
+            "path": "vars/vlan_id.yml",
+            "recurse": false,
+            "regexp": null,
+            "remote_src": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "src": null,
+            "state": null,
+            "unsafe_writes": null,
+            "validate": null
+        }
+    },
+    "item": " ANSIBLE_TEST_VLAN10",
+    "mode": "0644",
+    "owner": "ansible_usr",
+    "path": "vars/vlan_id.yml",
+    "size": 47,
+    "state": "file",
+    "uid": 197609
+}
+ok: [ios-swt-1] => (item=ANSIBLE_TEST_VLAN11) => {
+    "changed": false,
+    "diff": {
+        "after": {
+            "path": "vars/vlan_id.yml"
+        },
+        "before": {
+            "path": "vars/vlan_id.yml"
+        }
+    },
+    "gid": 197121,
+    "group": "None",
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": null,
+            "content": null,
+            "delimiter": null,
+            "dest": "vars/vlan_id.yml",
+            "diff_peek": null,
+            "directory_mode": null,
+            "follow": true,
+            "force": false,
+            "group": null,
+            "mode": null,
+            "original_basename": "vlan_id.j2",
+            "owner": null,
+            "path": "vars/vlan_id.yml",
+            "recurse": false,
+            "regexp": null,
+            "remote_src": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "src": null,
+            "state": null,
+            "unsafe_writes": null,
+            "validate": null
+        }
+    },
+    "item": "ANSIBLE_TEST_VLAN11",
+    "mode": "0644",
+    "owner": "ansible_usr",
+    "path": "vars/vlan_id.yml",
+    "size": 47,
+    "state": "file",
+    "uid": 197609
+}
+TASK [obtain vars] ****************************************************************************************************************************************************************************
+task path: ios-cli-ansible/tasks/ios_command-multi-vlan-exist-check.yml:2
+looking for "vars/vlan_id.yml" at "ios-cli-ansible/vars/vlan_id.yml"
+ok: [ios-swt-1] => {
+    "ansible_facts": {
+        "show": [
+            "show vlan id 11",
+            "show vlan id 12"
+        ]
+    },
+    "changed": false
+}
+```
+
