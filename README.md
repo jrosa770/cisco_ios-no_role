@@ -249,7 +249,7 @@ show:
 {% for key,value in vlans|dictsort %} - sh vlan id {{ value.id }} 
 {% endfor %}
 ```
-* Notice that the template includes the space needed for proper syntax *
+* Notice that the template includes the space needed for proper syntax
 
 Vars file (`vars\vlans-multi.yml`:
 ```yml
@@ -283,7 +283,7 @@ show:
 ```
 
 Playbook Debug:
-```json
+```
 TASK [create vlan_id.yml file for show vlan id task] ******************************************************************************************************************************************
 ok: [ios-swt-1] => (item= ANSIBLE_TEST_VLAN10) => {
     "changed": false,
