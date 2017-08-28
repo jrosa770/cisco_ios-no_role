@@ -46,7 +46,7 @@ cisco_ios-no_role/
 └── vars
     ├── README.md
     ├── vlan.yml
-    ├── vlan_id.yml
+    ├── vlan_id.yml # Created by Playbook Task
     ├── vlans.yml
     └── vlans-multi.yml
 
