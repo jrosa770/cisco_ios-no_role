@@ -213,7 +213,7 @@ Or
 $ansible-vault edit secrets.yml --vault-password-file vault_pass.py - i hosts
 ```
 
-> Workaround for the `ios_command` no template limitation
+#### Workaround for the `ios_command` no template limitation
 
 The IOS module for `ios_config` and `ios_template` have built in provisions for IOS configurations produced via templates. On the other hand `ios_command` does not contain any provisions for templates only single or multiple commands under the `command:` instruction.
 
