@@ -244,7 +244,7 @@ Example from: `cisco-cli-l2-multi-vlan_dynamic.yml`
     with_items: "{{ vlans }}"
 ```
 Template `templates/vlan_id.j2`
-```
+```py
 show:
 {% for key,value in vlans|dictsort %} - sh vlan id {{ value.id }} 
 {% endfor %}
