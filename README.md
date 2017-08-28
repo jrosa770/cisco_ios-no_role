@@ -244,14 +244,14 @@ Example from: `cisco-cli-l2-multi-vlan_dynamic.yml`
     with_items: "{{ vlans }}"
 ```
 Template `templates/vlan_id.j2`
-```j2
+```
 show:
 {% for key,value in vlans|dictsort %} - sh vlan id {{ value.id }} 
 {% endfor %}
 ```
 * Notice that the template includes the space needed for proper syntax
 
-Vars file (`vars\vlans-multi.yml`:
+Vars file (`vars\vlans-multi.yml`):
 ```yml
 ---
 proc: deploy
