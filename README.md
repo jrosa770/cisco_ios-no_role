@@ -223,7 +223,6 @@ Example:
   ios_command:
     commands: show vlan
 ```
-
 Or:
 ```yml
 - name: An ios_command routine
@@ -260,6 +259,12 @@ vlans_add:
  ANSIBLE_TEST_VLAN11: { id: 11, }
 vlans: "{{ vlans_add }}"
 ```
+Created file:
+```yml
+show:
+ - sh vlan id 10
+ - sh vlan id 11 
+```
 
 Task (From: `tasks/ios_command-multi-vlan-exist-check.yml`):
 ```yml
@@ -273,13 +278,6 @@ Task (From: `tasks/ios_command-multi-vlan-exist-check.yml`):
     provider: "{{ provider }}"
   ignore_errors: yes
   register: sh_vlan_output
-```
-
-Created file:
-```yml
-show:
- - sh vlan id 10
- - sh vlan id 11 
 ```
 
 Playbook Debug:
