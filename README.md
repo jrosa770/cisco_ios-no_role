@@ -2,7 +2,7 @@
 
 Template for non role based ios, on demmand configuration. Uses Ansible modules.
 
-## Folder Structure:
+## Folder Structure
 
 ```tree
 cisco_ios-no_role/
