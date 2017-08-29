@@ -2,7 +2,7 @@
 
 Template for non role based ios, on demmand configuration. Uses Ansible modules.
 
-#### Folder Structure:
+## Folder Structure:
 
 ```tree
 cisco_ios-no_role/
@@ -70,7 +70,7 @@ ansible-playbook -vvv cisco-cli-push.yml -i hosts
 
 ## Options in Playbook and Tasks
 
-##### Playbook Options
+### Playbook Options
 
 The playbook can be directed to affect a group in the hosts inventory file or a particular host within a group
 
@@ -140,7 +140,7 @@ The playbook will run the task on groups `[ios-swt]` and `[ios-rtr]`
         ssh_keyfile: /path_to_ssh_key_file
 ```
 
-##### Task Options:
+#### Task Options:
 
 ```yml
 - name: An IOS Configuration Task
