@@ -1,6 +1,6 @@
-# Non Role Based Playbook
+# Non Role Cisco IOS Module Based Ansible Playbook
 
-Template for non role based ios, on demmand configuration. Uses Ansible modules.
+Template for non role based ios, on demmand configuration. Uses Ansible modules for Cisco IOS.
 
 ## Folder Structure
 
