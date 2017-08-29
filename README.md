@@ -1,7 +1,10 @@
 # Non Role Based Playbook
+
 Template for non role based ios, on demmand configuration. Uses Ansible modules.
+
 #### Folder Structure:
-```
+
+```tree
 cisco_ios-no_role/
 ├── backup
 │   └── README.md
@@ -50,16 +53,18 @@ cisco_ios-no_role/
     ├── vlans.yml
     └── vlans-multi.yml
 
+# Updated Tree: 8/27/2017
 ```
-##### Updated Tree: 8/27/2017
 
 > Usage:
-```
+
+```sh
 ansible-playbook cisco-cli-push.yml -i hosts
 ```
 
 > With debug:
-```
+
+```sh
 ansible-playbook -vvv cisco-cli-push.yml -i hosts
 ```
 
@@ -68,13 +73,16 @@ ansible-playbook -vvv cisco-cli-push.yml -i hosts
 ##### Playbook Options
 
 The playbook can be directed to affect a group in the hosts inventory file or a particular host within a group
-Group = ios 
-```
+
+Group = ios:
+
+```yml
 # File: hosts
 [ios]
 ios-swt-1
 ios-rtr-1
 ```
+
 ```yml
 ---
 - hosts: ios
@@ -85,6 +93,7 @@ ios-rtr-1
 The playbook will run the task on `ios-swt-1` and `ios-rtr-1`
 
 For a particular host within the inventory file, in this case `ios-swt-1`:
+
 ```yml
 ---
 - hosts: ios-swt-1
@@ -94,7 +103,7 @@ For a particular host within the inventory file, in this case `ios-swt-1`:
 
 > More on hosts inventory file structure
 
-```
+```yml
 [ios-rtr]
 ios-rtr-1
 
@@ -121,7 +130,6 @@ port=22
 
 The playbook will run the task on groups `[ios-swt]` and `[ios-rtr]`
 
-
 > If SSH Keys are used for authentication you will need to establish where to find the ssh key file under provider
 
 ```yml
@@ -133,6 +141,7 @@ The playbook will run the task on groups `[ios-swt]` and `[ios-rtr]`
 ```
 
 ##### Task Options:
+
 ```yml
 - name: An IOS Configuration Task
   ios_config:
@@ -208,7 +217,9 @@ ansible-playbook cisco-cli-push.yml --vault-password-file vault_pass.py - i host
 $ansible-vault edit secrets.yml
 Vault password: your_secret_password
 ```
+
 Or
+
 ```sh
 $ansible-vault edit secrets.yml --vault-password-file vault_pass.py - i hosts
 ```
@@ -218,12 +229,15 @@ $ansible-vault edit secrets.yml --vault-password-file vault_pass.py - i hosts
 The IOS module for `ios_config` and `ios_template` have built in provisions for IOS configurations produced via templates. On the other hand `ios_command` module does not contain any provisions for templates only single or multiple commands under the `commands:` instruction.
 
 Example:
+
 ```yml
 - name: An ios_command routine
   ios_command:
     commands: show vlan
 ```
+
 Or:
+
 ```yml
 - name: An ios_command routine
   ios_command:
@@ -234,7 +248,9 @@ Or:
 ```
 
 The workaround is a separate task using the `template:` module in Ansible.
+
 Example from: `cisco-cli-l2-multi-vlan_dynamic.yml`
+
 ```yml
   - name: create vlan_id.yml file for show vlan id task
     template: 
@@ -242,15 +258,19 @@ Example from: `cisco-cli-l2-multi-vlan_dynamic.yml`
        dest=vars/vlan_id.yml
     with_items: "{{ vlans }}"
 ```
+
 Template `templates/vlan_id.j2`:
+
 ```py
 show:
 {% for key,value in vlans|dictsort %} - sh vlan id {{ value.id }} 
 {% endfor %}
 ```
+
 * Notice that the template includes the space needed for proper syntax
 
 Vars file (`vars\vlans-multi.yml`):
+
 ```yml
 ---
 proc: deploy
@@ -259,7 +279,9 @@ vlans_add:
  ANSIBLE_TEST_VLAN11: { id: 11, }
 vlans: "{{ vlans_add }}"
 ```
+
 Created file:
+
 ```yml
 show:
  - sh vlan id 10
@@ -267,6 +289,7 @@ show:
 ```
 
 Task (From: `tasks/ios_command-multi-vlan-exist-check.yml`):
+
 ```yml
 ---
 - name: obtain vars
@@ -281,7 +304,8 @@ Task (From: `tasks/ios_command-multi-vlan-exist-check.yml`):
 ```
 
 Playbook Debug:
-```
+
+```sh
 TASK [create vlan_id.yml file for show vlan id task] ******************************************************************************************************************************************
 ok: [ios-swt-1] => (item= ANSIBLE_TEST_VLAN10) => {
     "changed": false,
