@@ -1,0 +1,34 @@
+---
+- hosts: ios
+  gather_facts: yes
+  connection: network_cli
+  become: yes
+  become_method: enable
+  ignore_errors: yes
+
+  vars:
+    authentication_provider: normal
+
+  tasks:
+  - name: obtain login credentials
+    include_vars: secrets.yml
+
+  - name: Set Primary Username and Password
+    set_fact:
+      remote_user: "{{ creds['username'] }}"
+      ansible_ssh_pass: "{{ creds['password'] }}"
+    when: authentication_provider == "normal"
+
+  - name: Set Alternate Username and Password
+    set_fact:
+      remote_user: "{{ alt_creds['username'] }}"
+      ansible_ssh_pass: "{{ alt_creds['password'] }}"
+    when: authentication_provider == "alternate"
+
+  - name: IOS Interface Configuration
+    ios_config:
+    lines:
+      - description VLAN200_ACCESS
+      - switchport access vlan 200
+      - switchport mode access
+    parents: interface GigabitEthernet1/0/1
