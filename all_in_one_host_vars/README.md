@@ -202,9 +202,9 @@ The command to call the playbook and file:
 ```
 user@ansible:~$ ansible-playbook playbook.yml -l example-sw-01
 ```
-With the example- -01.yml, the playbook will produce the following changes:
+With the example-sw-01, the playbook will produce the following changes:
 
     * Clear the configurations of interface GigabitEthernet1/0/7 and interface GigabitEthernet1/0/8
     * Set interface GigabitEthernet1/0/7 to data 20 and voice 200
     * Set interface GigabitEthernet1/0/8 to data 20
-    * Set all current: modify to current: keep in the "example- -01.yml" file
+    * Set all current: modify to current: keep in the "example-sw-01" file
