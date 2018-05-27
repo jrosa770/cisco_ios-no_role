@@ -70,7 +70,7 @@ interfaces:
     voip_vlan: 100
     current: keep
 
-  - name: 'interface GigabitEthernet1/0/5
+  - name: 'interface GigabitEthernet1/0/5'
     vlan: 10
     if_type: access
     voip: enabled
