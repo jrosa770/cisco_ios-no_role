@@ -4,10 +4,10 @@ When I started with Ansible my tendency was to use a lot of one-time use device 
 
 Now for this example, we have are going to make the following assumptions:
 
-    1. The device is an 8 port 2900 IOS switch.
-    2. The FQDN name for the devices is example-sw-01.example.com. With an alias example-sw-01
-    3. The name of the file will match the alias: example-sw-01.yml
-    4. The hostname in the ansible inventory example-sw-01 so it matches the {{inventory_hostname }}.yml call in the playbook
+  1. The device is an 8 port 2900 IOS switch.
+  2. The FQDN name for the devices is example-sw-01.example.com. With an alias example-sw-01
+  3. The name of the file will match the alias: example-sw-01.yml
+  4. The hostname in the ansible inventory example-sw-01 so it matches the `{{inventory_hostname }}.yml` call in the playbook
 
 The file will look like this:
 
@@ -70,7 +70,7 @@ interfaces:
     voip_vlan: 100
     current: keep
 
-  - name: 'interface GigabitEthernet1/0/5'
+  - name: 'interface GigabitEthernet1/0/5
     vlan: 10
     if_type: access
     voip: enabled
@@ -103,10 +103,10 @@ As seen in the example above the main purpose is to recreate the device into a f
 
 The possible values for the "current" variable are:
 
-    * [modify] # Change
-    * [keep] # Leave untouched
-    * [absent] # or delete
-    * [ignore] # Self Explanatory
+  * [modify] # Change
+  * [keep] # Leave untouched
+  * [absent] # or delete
+  * [ignore] # Self Explanatory
 
 Now let's see the playbook:
 
@@ -198,13 +198,15 @@ Now let's see the playbook:
       replace: 'current: keep'
       after: 'interfaces:'
 ```
+
 The command to call the playbook and file:
 ```
 user@ansible:~$ ansible-playbook playbook.yml -l example-sw-01
 ```
+
 With the example-sw-01, the playbook will produce the following changes:
 
-    * Clear the configurations of interface GigabitEthernet1/0/7 and interface GigabitEthernet1/0/8
-    * Set interface GigabitEthernet1/0/7 to data 20 and voice 200
-    * Set interface GigabitEthernet1/0/8 to data 20
-    * Set all current: modify to current: keep in the "example-sw-01" file
+  * Clear the configurations of interface GigabitEthernet1/0/7 and interface GigabitEthernet1/0/8
+  * Set interface GigabitEthernet1/0/7 to data 20 and voice 200
+  * Set interface GigabitEthernet1/0/8 to data 20
+  * Set all current: modify to current: keep in the "example-sw-01" file
