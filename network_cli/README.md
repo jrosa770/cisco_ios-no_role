@@ -72,7 +72,9 @@ creds:
       provider:
         host: "{{ inventory_hostname }}"
         username: "{{ creds['username'] }}"
-        password: "{{ creds['password'] }}"#Uncomment next line if enable password is needed#auth_pass: "{{ creds['auth_pass'] }}"
+        password: "{{ creds['password'] }}"
+        #Uncomment next line if enable password is needed
+        #auth_pass: "{{ creds['auth_pass'] }}"
         transport: cli
 
   - name: IOS Interface Configuration
